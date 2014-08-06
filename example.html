@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>loader</title>
+    <style>
+        html,
+        body {
+            background-color: lightgrey;
+        }
+    </style>
+    <script src="loader.js"></script>
+</head>
+
+<body>
+    <div id="loader"></div>
+    <div id="controls">
+        <button type="button" onclick="loader.reset();percentageDummy=0;loop();">Start</button>
+        <button type="button" onclick="loader.addPercentage(randomInt(1, 15));">Add random percentage</button>
+        <button type="button" onclick="loader.reset();percentageDummy=0;" ;>Reset</button>
+    </div>
+    <script>
+
+        var loader = new Loader({
+            loader: document.getElementById('loader')
+        });
+
+
+        var percentageDummy = 0;
+
+        function loop() {
+            if (percentageDummy <= 100) {
+                setTimeout(function() {
+                    percentageDummy += randomInt(1, 15);
+                    loop();
+                }, randomInt(1, 7) * 100);
+            } else {
+                percentageDummy = 100;
+            }
+            loader.setPercentage(percentageDummy);
+        }
+
+
+        function randomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        
+    </script>
+</body>
+
+</html>
